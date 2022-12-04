@@ -1,6 +1,7 @@
 import { World } from './dist/index.js';
 import test from 'ava';
 import { Types } from './dist/types.js';
+import { threadedSystem } from './dist/threaded.js';
 
 test("Should construct the world", t => {
     let world = new World();
@@ -155,4 +156,33 @@ test("Should be able to find an entity then remove a component and unindex it", 
     world.removeComponent(eid1, Acomp);
     t.is(query().size, 0);
 
+})
+
+test("Should run systems in worker thread", t => {
+    const world = new World();
+
+    const Acomp = world.defineComponent({
+        value: Types.i8
+    })
+
+    for(let i = 0; i < 100; i++){
+        world.addEntity()
+            .addComponent(Acomp);
+    }
+    
+    const system = threadedSystem([Acomp], (eids, [Acomp]) => {
+        for(const eid of eids) {
+            Acomp.value[eid] = 10;
+        }
+    });
+
+    world.createPhase('test')
+        .addSystem(system);
+
+    world.runPhase('test');
+
+    for(let i = 0; i < 100; i++){
+        t.is(Acomp.value[i], 10);
+    }
+    
 })

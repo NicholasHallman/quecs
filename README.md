@@ -34,6 +34,13 @@ const moveHorizontalSystem = world => {
     }
 }
 
+//define a threaded system
+const threadHorizontalMoveSystem = threadedSystem([Position], (eids, [Position]) => {
+    for(const eid of eids) {
+        Position.y[eid] = 10;
+    }
+})
+
 // create a phase to contain the systems
 const physPhase = world.createPhase('physics');
 physPhase.addSystem(moveHorizontalSystem);
@@ -61,7 +68,7 @@ world.runPhase('physics');
 ### Phase
  - [x] Define a phase
  - [x] Add systems to a phase
- - [x] Run the phase 
+ - [x] Run the phase
 
 ### Queries
  - [x] Define query
@@ -70,8 +77,8 @@ world.runPhase('physics');
  - [ ] Not modifyer
 
 ### Multithreading
- - [ ] Function for threading system
+ - [x] Function for threading system
  - [ ] Check host environment to determine thread count and allocate worker pool
  - [x] Shared array buffers for easy worker access
- - [ ] Entity subset threading (One thread runs a subset of entities against a system)
+ - [x] Entity subset threading (One thread runs a subset of entities against a system)
  - [ ] Multi phase threading (One thread runs per Phase)

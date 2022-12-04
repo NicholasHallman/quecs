@@ -18,7 +18,7 @@ interface PhaseLookup {
 
 export class World {
     private entityCount;
-    private componentEntityMap: WeakMap<Component, number[]>;
+    private componentEntityMap: WeakMap<Component, number[] | undefined>;
     private componentMap: WeakMap<Component, any>;
     private _phases: PhaseLookup;
 
@@ -89,12 +89,12 @@ export class World {
         this._phases[name].run(this);
     }
 
-    defineQuery(...components: Component[]) {
+    defineQuery(...components: Component[]): () => Set<number> {
         return () => {
             const eids = new Set<number>();
             for(let i = 0 ; i < components.length; i ++){
                 const comp = components[i];
-                const eidsInComp = this.componentEntityMap.get(comp);
+                const eidsInComp = this.componentEntityMap.get(comp) ?? [];
                 if(i === 0) {
                     // populate the set with all the eids to start
                     for(const eid of eidsInComp) {
