@@ -66,12 +66,12 @@ world.runPhase('physics');
 ### Queries
  - [x] Define query
  - [x] Get entities from query
- - [] Cache entities in query
- - [] Not modifyer
+ - [ ] Cache entities in query
+ - [ ] Not modifyer
 
 ### Multithreading
- - [] Function for threading system
- - [] Check host environment to determine thread count and allocate worker pool
+ - [ ] Function for threading system
+ - [ ] Check host environment to determine thread count and allocate worker pool
  - [x] Shared array buffers for easy worker access
- - [] Entity subset threading (One thread runs a subset of entities against a system)
- - [] Multi phase threading (One thread runs per Phase)
+ - [ ] Entity subset threading (One thread runs a subset of entities against a system)
+ - [ ] Multi phase threading (One thread runs per Phase)
