@@ -35,7 +35,7 @@ const moveHorizontalSystem = world => {
 }
 
 //define a threaded system
-const threadHorizontalMoveSystem = threadedSystem([Position], (eids, [Position]) => {
+const threadVerticleMoveSystem = threadedSystem([Position], (eids, [Position]) => {
     for(const eid of eids) {
         Position.y[eid] = 10;
     }
@@ -43,7 +43,9 @@ const threadHorizontalMoveSystem = threadedSystem([Position], (eids, [Position])
 
 // create a phase to contain the systems
 const physPhase = world.createPhase('physics');
-physPhase.addSystem(moveHorizontalSystem);
+// create the pipeline
+physPhase.addSystem(moveHorizontalSystem)
+    .addSystem(threadVerticleMoveSystem);
 
 // run the phase
 world.runPhase('physics');
