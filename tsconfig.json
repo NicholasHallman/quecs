@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module":"ES2022",
+        "sourceMap": true,
+        "lib": ["ES2022"],
+        "outDir": "dist",
+        "target": "ES2022",
+    }
+}

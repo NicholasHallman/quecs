@@ -1,0 +1,25 @@
+{
+  "name": "quecs",
+  "version": "0.0.1",
+  "description": "A Fast JS ECS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "ava"
+  },
+  "keywords": [
+    "js",
+    "ecs",
+    "game",
+    "web"
+  ],
+  "author": "Nicholas Hallman",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "ava": "^5.1.0"
+  }
+}
